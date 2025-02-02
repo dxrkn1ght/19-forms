@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}Lesson Detail{% endblock %}
+
+{% block content %}
+    <h1 class="text-4xl font-bold mb-8">Test Detail: {{ test.name }}</h1>
+    <div class="bg-white shadow-md rounded-lg p-6">
+        <h2 class="text-2xl font-semibold mb-4">Questions</h2>
+        <p class="mb-6">{{ test.question }}</p>
+        <ul class="list-disc pl-6">
+            {% for question in test.questions.all %}
+                <li class="mb-4">
+                    <p class="font-semibold">{{ question.question }}</p>
+                    <ul class="list-inside">
+                        <li>{{ question.answer_1 }} {% if question.correct_1 %}✅{% endif %}</li>
+                        <li>{{ question.answer_2 }} {% if question.correct_2 %}✅{% endif %}</li>
+                    </ul>
+                </li>
+            {% empty %}
+                <p>No questions available.</p>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="mt-6">
+        <a href="{% url 'tests:edit' test.id %}" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 mr-2">Edit Test</a>
+        <a href="{% url 'tests:list' %}" class="bg-gray-600 text-white px-4 py-2 rounded hover:bg-gray-700">Back to Test List</a>
+    </div>
+{% endblock %}

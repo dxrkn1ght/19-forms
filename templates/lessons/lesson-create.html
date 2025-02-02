@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}Create Lesson{% endblock %}
+
+{% block content %}
+    <h1 class="text-4xl font-bold mb-8">{% if lesson %}Edit Lesson{% else %}Create Lesson{% endif %}</h1>
+    <form method="post" class="space-y-4">
+        {% csrf_token %}
+        <div>
+            {{ form.name.label_tag }}
+            {{ form.name }}
+        </div>
+        <div>
+            {{ form.description.label_tag }}
+            {{ form.description }}
+        </div>
+        <div>
+            <button type="submit" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">{% if lesson %}Edit Lesson{% else %}Create Lesson{% endif %}</button>
+            <a href="{% url 'lessons:list' %}" class="bg-gray-600 text-white px-4 py-2 rounded hover:bg-gray-700 ml-2">Cancel</a>
+        </div>
+    </form>
+{% endblock %}
